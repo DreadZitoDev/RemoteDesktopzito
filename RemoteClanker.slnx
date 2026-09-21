@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RemoteClanker.Client/RemoteClanker.Client.csproj" />
+    <Project Path="src/RemoteClanker.Host/RemoteClanker.Host.csproj" />
+    <Project Path="src/RemoteClanker.Shared/RemoteClanker.Shared.csproj" />
+  </Folder>
+</Solution>
