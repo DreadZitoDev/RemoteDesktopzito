@@ -1,11 +1,12 @@
 using System.Collections.Concurrent;
+using System.Net.Sockets;
 using RemoteClanker.Shared;
 
 namespace RemoteClanker.Client;
 
 internal sealed class MainForm : Form
 {
-    private readonly TextBox addressBox = new() { Width = 180, Text = $"127.0.0.1:{Protocol.DEFAULT_PORT}" };
+    private readonly TextBox addressBox = new() { Width = 180, PlaceholderText = $"ip:{Protocol.DEFAULT_PORT}" };
     private readonly TextBox passwordBox = new() { Width = 120, UseSystemPasswordChar = true };
     private readonly Button connectButton = new() { Text = "Conectar", AutoSize = true };
     private readonly Label statusLabel = CreateLabel("Desconectado");
@@ -88,6 +89,10 @@ internal sealed class MainForm : Form
             connectButton.Text = "Desconectar";
             statusLabel.Text = $"Conectado a {host}:{port}";
             remoteView.Focus();
+        }
+        catch (SocketException ex) when (ex.SocketErrorCode == SocketError.ConnectionRefused)
+        {
+            statusLabel.Text = $"Nada escucha en {host}:{port}. ¿Es la IP del host y está corriendo?";
         }
         catch (Exception ex)
         {
