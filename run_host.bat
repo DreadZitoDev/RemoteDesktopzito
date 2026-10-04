@@ -1,0 +1,1 @@
+dotnet run --project src/RemoteClanker.Host -- --password miClave
